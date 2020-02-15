@@ -12,8 +12,6 @@ app.use(bodyParser.json());
 
 
 app.get('/weatherInfo/:city', (req, res) => {
-    console.log(req.body);
-
     let city = req.params.city
 
     request.get(
@@ -28,18 +26,14 @@ app.get('/weatherInfo/:city', (req, res) => {
                     msg: "No match found!!"
                 })
             } else {
-                console.log("\n *******-------GET-------******** \n", data)
                 res.send(data);
             }
         }
     );
-
-    // res.send('Book is added to the database');
 });
 
 app.post('/weatherInfo', (req, res) => {
 
-    console.log(req.body);
     let cities = req.body.cities;
     let p = fetchData(cities);
     p.then((response,error)=>{
@@ -50,39 +44,14 @@ app.post('/weatherInfo', (req, res) => {
                 msg:"Error while fetching Data!"
             })
         } else {
-            console.log("\n *******------POST--------******** \n",response);
             let dataArray = [];
             for(let d of response){
-                // console.log(JSON.parse(d));
                 dataArray.push(JSON.parse(d));
             }
             res.send(dataArray);
-            // res.status(200).json({
-            //     success:true,
-            //     data:response
-            // })
+            
         }
     })
-
-
-    // request.get(
-    //     `${appInfo.baseURI}?woeid=${cities[0]}&format=json`,
-    //     null,
-    //     null,
-    //     function (err, data, result) {
-    //         if (err) {
-    //             console.log(err);
-    //             res.status(404).json({
-    //                 success:false,
-    //                 msg:"No match found!!"
-    //             })
-    //         } else {
-    //             console.log("\n *******------POST--------******** \n",data)
-    //             res.send(data);
-    //         }
-    //     }
-    // );
-
 });
 
 function asyncFunctionCall(cityId) {
@@ -96,10 +65,8 @@ function asyncFunctionCall(cityId) {
                     console.log(`\n Response for ${cityId} \n ${error}`);
                 }
                 else if(typeof response !== 'undefined') {
-                    console.log(`\n Response for ${cityId} \n ${response}`);
                         resolve(response);
                         return;
-                    // }
                 }
                 resolve(false);
             }
@@ -111,7 +78,6 @@ function asyncFunctionCall(cityId) {
 function fetchData(cities) { 
     const promises = [];
     for(var cityId of cities) {
-        console.log(`------ ${cityId} ------`);
         promises.push(asyncFunctionCall(cityId)); 
     }
         return Promise.all(promises);

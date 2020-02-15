@@ -16,26 +16,3 @@ const request = new OAuth.OAuth(
 );
 
 module.exports = request;
-
-// function getWeatherOfCity(city){
-//     city = city ? city: "sunnyvale"
-//     request.get(
-//         `${appInfo.baseURI}?location=${city}&format=json`,
-//         null,
-//         null,
-//         function (err, data, result) {
-//             if (err) {
-//                 console.log(err);
-//             } else {
-//                 console.log("\n *******--------------******** \n",data)
-//             }
-//         }
-//     );
-// }
-
-
-// var apiObj = {
-//     getByCityName : getWeatherOfCity
-// }
-
-// module.exports = apiObj;
