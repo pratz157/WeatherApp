@@ -6,5 +6,6 @@ This weather app is built using MERN stack and TypeScript.
 
 To start using this application, run following commands
 
-- npm run resolve-depdencies
+- npm install
+- npm run client-install
 - npm run dev
